@@ -1,0 +1,12 @@
+[
+    {
+        "id": "1",
+        "secretKey": "abc547bd86",
+        "message": "Hola mundo"
+    },
+    {
+        "id": "2",
+        "secretKey": "hus782js20",
+        "message": "Chau mundo"
+    }
+]
