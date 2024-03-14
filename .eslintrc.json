@@ -3,7 +3,8 @@
         "browser": true,
         "node": true,
         "commonjs": true,
-        "es2021": true
+        "es2021": true,
+        "jest": true
     },
     "extends": "standard",
     "parserOptions": {
@@ -11,6 +12,7 @@
     },
     "rules": {
         "semi": 0,
-        "quotes": "off"
+        "quotes": "off",
+        "space-before-function-paren": ["error", "never"]
     }
 }
