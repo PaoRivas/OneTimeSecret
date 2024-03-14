@@ -1,18 +1,21 @@
-var express = require("express");
-var router = express.Router();
-var messages = require("../sample.json");
-var { generateRandomString } = require("../public/javascripts/helpers.js");
+const express = require("express");
+const router = express.Router();
+const { generateRandomString } = require("../public/javascripts/helpers.js");
+require("dotenv").config();
+
+const secretMap = new Map();
 
 /* GET secret */
 router.get("/:secretKey", (req, res) => {
   try {
     const { secretKey } = req.params;
-    const secretItem = messages.find((x) => x.secretKey == secretKey);
-    if (!secretItem) {
+
+    if (!secretMap.has(secretKey)) {
       throw new Error("It either never existed or has already been viewed.");
     }
-    messages.splice(messages.indexOf(secretItem), 1);
-    res.send({ secretMessage: secretItem.message });
+    const secretMessage = secretMap.get(secretKey);
+    secretMap.delete(secretKey);
+    res.status(200).send({ secretMessage });
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
@@ -20,15 +23,13 @@ router.get("/:secretKey", (req, res) => {
 
 router.post("/", (req, res) => {
   try {
-    const id = messages.length + 1;
     const { message } = req.body;
-    const secretKey = generateRandomString(7);
-    const newMessage = { id, secretKey, message };
-    messages.push(newMessage);
-    res.json({ secretKey });
+    const secretKey = generateRandomString(process.env.SECRET_SIZE);
+    secretMap.set(secretKey, message);
+    res.status(201).json({ secretKey });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-module.exports = router;
+module.exports = { router, secretMap };
