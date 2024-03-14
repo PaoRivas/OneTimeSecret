@@ -24,5 +24,8 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Run ESLint
+        run: npx eslint .
+
       - name: Run Tests
         run: npm test
