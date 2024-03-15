@@ -22,6 +22,7 @@
   "devDependencies": {
     "@babel/cli": "^7.23.9",
     "@babel/core": "^7.24.0",
+    "@babel/plugin-transform-strict-mode": "^7.23.3",
     "@babel/preset-env": "^7.24.0",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",

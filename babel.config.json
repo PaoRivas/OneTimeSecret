@@ -3,5 +3,5 @@
     "parserOpts": {
       "allowReturnOutsideFunction": true
     },
-    "plugins": ["transform-remove-strict-mode"]
+    "plugins": ["@babel/plugin-transform-strict-mode"]
   }
