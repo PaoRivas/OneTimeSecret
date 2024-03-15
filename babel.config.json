@@ -1,7 +1,3 @@
 {
-    "presets": ["@babel/preset-env"],
-    "parserOpts": {
-      "allowReturnOutsideFunction": true
-    },
-    "plugins": ["@babel/plugin-transform-strict-mode"]
+    "presets": ["@babel/preset-env"]
   }
