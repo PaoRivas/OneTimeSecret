@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "jest",
+    "test": "nyc jest",
     "build": "babel src -d dist"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
+    "nyc": "^15.1.0",
     "supertest": "^6.3.4"
   }
 }
