@@ -2,5 +2,6 @@
     "presets": ["@babel/preset-env"],
     "parserOpts": {
       "allowReturnOutsideFunction": true
-    }
+    },
+    "plugins": ["transform-remove-strict-mode"]
   }
