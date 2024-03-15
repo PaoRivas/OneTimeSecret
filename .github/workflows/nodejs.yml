@@ -58,3 +58,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build the Docker image
         run: docker build -t onetimesecret .
+        run: docker run -d -p 5000:5000 --name registry registry:2
+        run: docker tag onetimesecret localhost:5000/onetimesecret
+        run: docker push localhost:5000/onetimesecret
+
+
