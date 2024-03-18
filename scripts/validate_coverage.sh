@@ -5,8 +5,8 @@ echo "Check Coverage"
 COVERAGE_REPORT_PATH="../coverage/clover.xml"
 
 # Parse XML and extract coverage information
-statements=$(xmlstarlet sel -t -v "//metrics/@statements" $COVERAGE_REPORT_PATH)
-covered_statements=$(xmlstarlet sel -t -v "//metrics/@coveredstatements" $COVERAGE_REPORT_PATH)
+statements=$(grep -oP '(?<=statements=")[^"]+' $COVERAGE_REPORT_PATH | sed -n '1p')
+covered_statements=$(grep -oP '(?<=coveredstatements=")[^"]+' $COVERAGE_REPORT_PATH | sed -n '1p')
 
 # Calculate coverage percentage
 coverage_percentage=$(awk "BEGIN { print $covered_statements / $statements }")
