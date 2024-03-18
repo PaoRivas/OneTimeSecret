@@ -44,7 +44,10 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        run: npx eslint .
+        run: npx eslint . --format=html --output-file=./report/eslint_report.html
+
+      - name: Validate Coverage
+        run: sh ./scripts/validate_report.sh
 
       - name: Run Tests
         run: npm test
