@@ -56,14 +56,43 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Login to GHCR
+        run: echo ${{secrets.GH_TOKEN}} | docker login -u ${{ github.actor }} ghcr.io --password-stdin
+
       - name: Build the Docker image
-        run: docker build -t onetimesecret .
-
-      - name: Run the Docker container
-        run: docker run -d -p 5000:5000 --name registry registry:2
-
-      - name: Tag the Docker image
-        run: docker tag onetimesecret localhost:5000/onetimesecret
+        run: docker build -t ghcr.io/paorivas/onetimesecret:1.0.0 .
 
       - name: Push the Docker image to the registry
-        run: docker push localhost:5000/onetimesecret
+        run: docker push ghcr.io/paorivas/onetimesecret:1.0.0
+
+  # publish:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Build the Docker image
+  #       run: docker build -t onetimesecret .
+
+  #     - name: Run the Docker container
+  #       run: docker run -d -p 5000:5000 --name registry registry:2
+
+  #     - name: Tag the Docker image
+  #       run: docker tag onetimesecret localhost:5000/onetimesecret
+
+  #     - name: Push the Docker image to the registry
+  #       run: docker push localhost:5000/onetimesecret
+
+  #     - name: Delete the Docker image to the registry
+  #       run: docker rmi localhost:5000/onetimesecret
+
+  # deploy:
+  #   needs: publish
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Pull the Docker image
+  #       run: docker pull localhost:5000/onetimesecret
+  #     - name: Put it in a container
+  #       run: docker run --name prueba -d -p 3000:3000 localhost:5000/onetimesecret
