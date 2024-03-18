@@ -48,6 +48,9 @@ jobs:
 
       - name: Run Tests
         run: npm test
+
+      - name: Validate Coverage
+        run: sh ./scripts/validate_coverage.sh
     if: github.event_name == 'push'
 
   publish:
